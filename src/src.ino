@@ -20,7 +20,8 @@ const word TCNT1_TOP = 16000000 / (2 * PWM_FREQ_HZ);
 #define STATE_LINEAR 2
 
 // Linear constants
-const float k = (MAX_FAN_SPEED - MIN_FAN_SPEED) / (TEMP_MAX - TEMP_MIN);
+const float divisor = max((TEMP_MAX - TEMP_MIN), 1.0);  // Make sure we don't divide with 0 by mistake
+const float k = (MAX_FAN_SPEED - MIN_FAN_SPEED) / divisor;
 const float m = MIN_FAN_SPEED - k * TEMP_MIN;
 
 // Temp sensor code
