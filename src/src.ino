@@ -7,7 +7,7 @@ const byte OC1B_PIN = 10;
 const word PWM_FREQ_HZ = 25000; //Adjust this value to adjust the frequency (Frequency in HZ!) (Set currently to 25kHZ)
 const word TCNT1_TOP = 16000000 / (2 * PWM_FREQ_HZ);
 
-#define MIN_FAN_SPEED 30  // Minimum allowed fan speed (% duty cycle)
+#define MIN_FAN_SPEED 50  // Minimum allowed fan speed (% duty cycle)
 #define MAX_FAN_SPEED 100 // Maxium fan speed (% duty cycle)
 
 // Temperature limits. Between these limits fan speed increases lineraly with temperature
