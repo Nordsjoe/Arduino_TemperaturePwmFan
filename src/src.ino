@@ -89,23 +89,23 @@ void loop() {
     state = STATE_MAX_SPEED;
   }
 
-
+Serial.print(", PWM duty: ");
   switch (state) {
     case STATE_MIN_SPEED:
       setPwmDuty(MIN_FAN_SPEED);
+      Serial.println(MIN_FAN_SPEED);
       break;
     case STATE_LINEAR:
       pwmDuty = calcPwmDuty(temperature);
       setPwmDuty(pwmDuty);
-      Serial.print(", PWM duty: ");
       Serial.println(pwmDuty);
       break;
     default:
       // Max speed, temperature above TEMP_MAX or faulty
       setPwmDuty(MAX_FAN_SPEED);
+      Serial.println(MAX_FAN_SPEED);
       break;
   }
-
 }
 
 void setPwmDuty(byte duty) {
