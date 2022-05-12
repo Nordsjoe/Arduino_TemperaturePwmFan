@@ -52,13 +52,13 @@ void loop() {
   static byte pwmDuty = 100;
   // Temp sensor code start
   int sensorVal = analogRead(sensorPin);
-  Serial.print("Sensor value: ");
-  Serial.print(sensorVal);
+  // Serial.print("Sensor value: ");
+  // Serial.print(sensorVal);
 
   // Convert ADC reading to voltage
   float voltage = (sensorVal / 1024.0) * 5.0;
-  Serial.print(", Volts: ");
-  Serial.print(voltage);
+  // Serial.print(", Volts: ");
+  // Serial.print(voltage);
 
   // Convert to degC
   float temperature = (voltage - .5) * 100;
@@ -68,11 +68,13 @@ void loop() {
   if (temperature < 0.0 || temperature > 100.0) 
   {
     temperature = 100.0;
-    Serial.print("Unexpected temperature detected. Sensor faulty?");
+    Serial.println("Unexpected temperature detected. Sensor faulty?");
+    Serial.print(" Degrees C: ");
+    Serial.print(temperature);
   }
   
-  Serial.print(", degrees C: ");
-  Serial.print(temperature);
+  // Serial.print(", degrees C: ");
+  // Serial.print(temperature);
   // Temp sensor code end
 
   if (temperature < TEMP_MIN)
@@ -89,21 +91,21 @@ void loop() {
     state = STATE_MAX_SPEED;
   }
 
-Serial.print(", PWM duty: ");
+// Serial.print(", PWM duty: ");
   switch (state) {
     case STATE_MIN_SPEED:
       setPwmDuty(MIN_FAN_SPEED);
-      Serial.println(MIN_FAN_SPEED);
+      // Serial.println(MIN_FAN_SPEED);
       break;
     case STATE_LINEAR:
       pwmDuty = calcPwmDuty(temperature);
       setPwmDuty(pwmDuty);
-      Serial.println(pwmDuty);
+      // Serial.println(pwmDuty);
       break;
     default:
       // Max speed, temperature above TEMP_MAX or faulty
       setPwmDuty(MAX_FAN_SPEED);
-      Serial.println(MAX_FAN_SPEED);
+      // Serial.println(MAX_FAN_SPEED);
       break;
   }
 }
